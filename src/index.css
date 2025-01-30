@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+.layout-container{
+   
+    grid-template-columns: 18rem 1fr;
+    grid-template-rows: auto 1fr;
+}
+
+
+
+
+.sideBar{
+    grid-row: 1/-1;
+
+}

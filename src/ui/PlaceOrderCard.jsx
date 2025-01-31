@@ -1,18 +1,20 @@
 import React from 'react'
 import Button from './Button'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { confirmOrder } from '../features/order/order.slice'
 import { nanoid } from '@reduxjs/toolkit'
-import { useNavigate } from 'react-router-dom'
+import { json, useNavigate } from 'react-router-dom'
 import products from '../data/product_details'
 import { makeCartEmpty } from '../features/cart/cart.slice'
+import { setItemsInLocalStorage } from '../hooks/useLocalStorage'
 
 function PlaceOrderCard({data}) {
 
   const currProduct = data[data.length - 1]
 
-
+console.log(data)
   const date = new Date(currProduct.time).toDateString();
+  const alldata = useSelector(({order}) => order.orders )
 
   
   
@@ -29,7 +31,6 @@ function handleConfirmOrder(){
   dispatch(makeCartEmpty())
   
   
-
 }
 
 

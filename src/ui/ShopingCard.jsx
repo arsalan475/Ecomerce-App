@@ -11,6 +11,7 @@ function ShopingCard({product,handleProducOverView}) {
 
  function handleAddToCart(){
     dispatch(addToCart({...product,quantity:1}))
+    
  }
 
 

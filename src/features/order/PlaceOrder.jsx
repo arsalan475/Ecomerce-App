@@ -9,7 +9,7 @@ function PlaceOrder() {
   
     const {id} = useParams()
     const data = useSelector(({order}) => order.orders )
-     
+     console.log
     
     return (
         <PlaceOrderCard data={data} />

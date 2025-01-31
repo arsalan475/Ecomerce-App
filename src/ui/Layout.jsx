@@ -13,7 +13,7 @@ function Layout() {
   return (
     <div className=' w-full layout-container'>
 
-<Header/>
+{/* <Header/> */}
 <SideBar/> 
 
 <main className='flex  py-9 sm:px-4'>

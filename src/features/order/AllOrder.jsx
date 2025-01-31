@@ -1,23 +1,24 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { getItemsInLocalStorage } from '../../hooks/useLocalStorage'
 
 function AllOrder() {
   const navigate = useNavigate()
-    const data = useSelector(({order}) => order.orders )
-    const check = data.map((data)=> data.products )
+    const data = getItemsInLocalStorage('data')
+      const Products = data.map((data)=> data.products )
     
   
 
  
-    // check.forEach((pro)=>{
-    //  console.log(pro.title)
+    // Products.forEach((product)=>{
+    //  console.log(product.title)
     // })
   return (<div className='flex flex-col gap-2'>
 
-{check.map((pro,i)=>{
+{Products.map((product,i)=>{
  
-return <div className='flex  flex-col items-center justify-center bg-slate-100 py-2 gap-4 text-xs sm:text-sm'>
+return <div key={data[i].orderId} className='flex  flex-col items-center justify-center bg-slate-100 py-2 gap-4 text-xs sm:text-sm'>
 
 <div className='w-full px-1 sm:w-5/6  flex justify-between text-[8px] sm:text-[10px] md:text-xs'>
 
@@ -33,10 +34,10 @@ return <div className='flex  flex-col items-center justify-center bg-slate-100 p
 </div>
   <div className='flex gap-2 sm:gap-4'>
   {
-      pro.map((p)=> {
+      product.map((p)=> {
 
   
-      return <div key={p.orderId}>
+      return <div key={p.id}>
       <div className='w-full text-[8px] sm:text-xs'>
        <span>{p.title}</span>
        <img className='w-10 sm:w-20 cursor-pointer' src={p.image} alt={p.title} onClick={()=> {navigate(`/product-overview/${p.id}`)}}/>

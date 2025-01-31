@@ -5,6 +5,7 @@ import products from '../../data/product_details'
 import Button from '../../ui/Button'
 import CheckOut from '../order/CheckOut'
 import { useNavigate } from 'react-router-dom'
+import { getItemsInLocalStorage } from '../../hooks/useLocalStorage'
 
 function Cart() {
 
@@ -18,8 +19,9 @@ function handleCheckOut() {
 
 // selecting cart state form cart slice
 
-  const cartItems = useSelector(({cart})=> cart.items)    // cartItmes is return me the array of objects with cart details 
+  const cartItems = useSelector(({cart})=> cart.items)   // cartItmes is return me the array of objects with cart details 
 
+  // const cartItems = getItemsInLocalStorage('cartItems');
 
   
   // finding products  with cartItmes id which is retuning 2d array thats why we need to use flat 

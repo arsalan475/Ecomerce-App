@@ -18,3 +18,13 @@
     grid-row: 1/-1;
 
 }
+
+
+@keyframes spin {
+    to {
+        transform: translate(-50%,-50%) rotate(360deg);
+    }
+  }
+  .animate-spin-my {
+    animation: spin 1s linear infinite;
+  }

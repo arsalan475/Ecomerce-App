@@ -1,9 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getIndex } from "./utils";
+import { getItemsInLocalStorage, setItemsInLocalStorage } from "../../hooks/useLocalStorage";
+
+
+const items = getItemsInLocalStorage('cartItems')
+const total = getItemsInLocalStorage('total')
 
 const initialState = {
-    total: 0,
-    items:[]
+    total,
+   items:   items != null ? [...items] : []
 }
 
 
@@ -23,22 +28,11 @@ const cartSlice = createSlice({
                     state.items[index].defaultSize = action.payload.defaultSize ? action.payload.defaultSize : state.items[index].defaultSize
                     state.items[index].defaultColor = action.payload.defaultColor ?  action.payload.defaultColor : state.items[index].defaultColor
                 }
-               
-            },
-
-            editCartDetails:function(state,action){
-                    const index = getIndex(state,action)
-
-                    state.items[index].defaultSize = action.payload.size ? action.payload.size : state.items[index].defaultSize
-                    state.items[index].defaultColor = action.payload.color ?  action.payload.color : state.items[index].defaultColor
+               setItemsInLocalStorage('total',state.total)
+                setItemsInLocalStorage('cartItems',state.items)
             },
 
 
-            deleteCartItem:function(state,action){
-                const index = getIndex(state,action)
-                state.total -= state.items[index].quantity
-             state.items.splice(index,1)
-        },
             controlQuantity:function(state,action){
                 const index = state.items.findIndex(items=> items.id === action.payload.id )
                
@@ -50,12 +44,41 @@ const cartSlice = createSlice({
 
                 state.total = state.items.reduce((acc, curr) => acc + curr.quantity,0)
 
-               
+                setItemsInLocalStorage('total',state.total)
+
+                setItemsInLocalStorage('cartItems',state.items)
+
+
+            },
+            editCartDetails:function(state,action){
+                    const index = getIndex(state,action)
+
+                    state.items[index].defaultSize = action.payload.size ? action.payload.size : state.items[index].defaultSize
+                    state.items[index].defaultColor = action.payload.color ?  action.payload.color : state.items[index].defaultColor
+
+                    setItemsInLocalStorage('cartItems',state.items)
 
             },
 
+
+            deleteCartItem:function(state,action){
+                const index = getIndex(state,action)
+                state.total -= state.items[index].quantity
+             state.items.splice(index,1)
+
+             setItemsInLocalStorage('total',state.total)
+
+             setItemsInLocalStorage('cartItems',state.items)
+
+        },
+           
+
             makeCartEmpty : function(state,action){
-                return initialState
+                state.items = [];
+                state.total = 0
+                setItemsInLocalStorage('total',state.total)
+
+                setItemsInLocalStorage('cartItems',state.items)
             }
     }
 })

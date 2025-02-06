@@ -32,7 +32,7 @@ function EditProductDetails() {
     
     
       return (
-        <div className='w-2/3'>
+        <div className='px-2 w-full lg:w-2/3'>
             { getProduct().map(product => <OverViewCard key={product.id} product={product} handleOnChange={handleOnChange} btnText={'back to cart'}/>) }
         </div>
       )

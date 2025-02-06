@@ -17,7 +17,7 @@ const filterData = () => getDataById(products,id)
  
 
   return (
-    <div className='w-2/3'>
+    <div className='px-2 w-full lg:w-2/3'>
         { filterData().map(product => <OverViewCard key={product.id}  product={product} btnText={'Add To Cart'}/>) }
     </div>
   )

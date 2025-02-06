@@ -78,15 +78,15 @@ function getSize(e) {
 
 
   return (
-    <div className=' ring ring-slate-100 shadow-xl text-slate-700 ring-offset-2 rounded-sm w-full  flex gap-4'>
+    <div className=' ring ring-slate-100 shadow-xl text-slate-700 ring-offset-2 rounded-sm w-full  flex gap-2 sm:gap-4 p-2'>
         <div className='w-1/2  h-full '><img className='w-full  h-full rounded-lg' src={product.image} alt="product Image" /></div>
-        <div className='flex flex-col gap-2  w-full '>
-            <span className='font-semibold text-2xl uppercase'>{product.title}</span>
-            <span className='text-lg capitalize'>{product.description}</span>
-            <div className='font-thin'><span>Quantity</span> : <span>{product.quantity || product.quantityAvailable}</span></div>
-            <div className='flex gap-4 uppercase font-semibold text-sm'>
+        <div className='flex flex-col gap-1 sm:gap-2  w-full max-sm:text-xs'>
+            <span className='font-semibold text-lg sm:text-2xl uppercase'>{product.title}</span>
+            <span className=' sm:text-lg capitalize'>{product.description}</span>
+            <div className='font-thin max-sm:text-[10px]'><span>Quantity</span> : <span>{product.quantity || product.quantityAvailable}</span></div>
+            <div className='flex gap-4 uppercase font-semibold text-[8px] sm:text-sm'>
                {product.sizes.map((size,i)=> <div key={size}>
-                <label htmlFor={size}>{size}</label> 
+                <label htmlFor={size} className='mr-1'>{size}</label> 
                 <input type="radio" value={size} onChange={(e)=> {
                   getSize(e)
                   handleOnChange({
@@ -98,9 +98,9 @@ function getSize(e) {
                 
             </div>
 
-            <div className='flex gap-4 uppercase font-semibold text-xs'>
+            <div className='flex gap-4 uppercase font-semibold text-[8px] sm:text-sm'>
             {product.colors.map((color)=> <div key={color}>
-                <label htmlFor={color}>{color}</label> 
+                <label htmlFor={color} className='mr-1'>{color}</label> 
                 <input type="radio" value={color} onChange={(e)=> {
                   getColor(e)
                   handleOnChange(
@@ -114,10 +114,14 @@ function getSize(e) {
 
             </div>
             
-           <Button handleOnClick={handleBuyPorduct} bg='bg-sky-400' hover='hover:bg-sky-500'>buy now</Button>
+                <div className='flex sm:flex-col'>
 
+           <Button handleOnClick={handleBuyPorduct} bg='bg-sky-400' hover='hover:bg-sky-500' width='w-full max-sm:w-5/6 max-sm:text-xs'>buy now</Button>
             {/* below button work defferent in both product over view conpmonent and edit product component */}
-           <Button handleOnClick={buttonTextProp}>{btnText}</Button>
+           
+           <Button handleOnClick={buttonTextProp} width='w-full max-sm:w-full max-sm:text-xs '>{btnText}</Button>
+        
+           </div>
         </div>
         
     </div>
